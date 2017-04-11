@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+var yargs = require('yargs')
+  .option('package',{
+    required: true,
+    alias:'p',
+    description:'the package we want to make sure has replicated to your region.'
+  })
+  .option('version', {
+    alias: 'v',
+    description: 'we want to wait will we see this version in the metadata',
+  })
+  .option('window', {
+    alias: 'w',
+    description: 'we want to wait until we see a chnage made after window SECONDS ago',
+    default: 60,
+  })
+  .option('verbose',{
+    type:'boolean',
+    default: false
+  })
+  .option('max-wait',{
+     description:"the maximum time to poll looking for the change. SECONDS",
+    default:60
+  })
+  .help('help')
+
+var opts = yargs.argv
+
+if(opts.verbose){
+  console.log('checking package '+opts.package+(opts.version?' version '+opts.version:' change in the last '+opts.window+' seconds'))
+}
+
+var maxWait = +(opts['max-wait']||60)
+if(isNaN(maxWait) || maxWait < 1){
+  console.log('please pass a number > 0 as max-wait')
+  process.exit(2)
+}
+
+setTimeout(function(){
+  console.log('failed to find change within max-wait of '+opts['max-wait'])
+  process.exit(1)
+},maxWait*1000).unref()
+
+
+var t = Date.now()
+require('../')(opts,function(err){
+  if(err) {
+    console.log('failed to find change in time '+err)
+    process.exit(1)
+  } else {
+    console.log('found change in '+(Date.now()-t)+'ms')
+  }
+})
+
+

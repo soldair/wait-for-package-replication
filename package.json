@@ -1,0 +1,32 @@
+{
+  "name": "wait-for-package-replication",
+  "version": "1.0.0",
+  "description": "poll package endpoint after publish for modified time to change.￼Edit",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "bin":{
+    "wait-for-package-replication":"bin/wait-for-package-replication"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soldair/wait-for-package-replication.git"
+  },
+  "author": "Ryan Day <soldair@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soldair/wait-for-package-replication/issues"
+  },
+  "homepage": "https://github.com/soldair/wait-for-package-replication#readme",
+  "devDependencies": {
+    "nyc": "^10.2.0",
+    "standard": "^10.0.1",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "registry-auth-token": "^3.1.2",
+    "request": "^2.81.0",
+    "yargs": "^7.0.2"
+  }
+}
