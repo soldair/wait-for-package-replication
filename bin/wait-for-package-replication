@@ -9,6 +9,7 @@ var yargs = require('yargs')
   .option('version', {
     alias: 'v',
     description: 'we want to wait will we see this version in the metadata',
+    type:'string'
   })
   .option('window', {
     alias: 'w',

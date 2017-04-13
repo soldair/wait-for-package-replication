@@ -25,7 +25,7 @@ module.exports = function (opts, cb) {
   }
 
   if (token) {
-    headers.authorization = 'Bearer ' + token
+    headers.authorization = 'Bearer ' + token.token
   }
 
   var reqOpts = {
@@ -51,10 +51,11 @@ module.exports = function (opts, cb) {
         setTimeout(function () {
           loop()
         }, delay)
+        return;
       }
 
-      if (version) {
 
+      if (version) {
         if (obj.versions[version]) {
           return cb(null, obj)
         }
