@@ -1,13 +1,13 @@
 {
   "name": "wait-for-package-replication",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "poll package endpoint after publish for modified time to change.￼Edit",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
   },
-  "bin":{
-    "wait-for-package-replication":"bin/wait-for-package-replication"
+  "bin": {
+    "wait-for-package-replication": "bin/wait-for-package-replication"
   },
   "repository": {
     "type": "git",
