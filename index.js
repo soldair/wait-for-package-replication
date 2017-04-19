@@ -67,7 +67,7 @@ module.exports = function (opts, cb) {
         }
       }
       if(opts.verbose){
-        console.log('no change found in '+reqOpts.url)
+        console.log('no change found in '+reqOpts.url+" status: "+res.statusCode+' headers:'+JSON.stringify(res.headers))
       }
 
       return setTimeout(function () {
