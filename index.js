@@ -21,7 +21,8 @@ module.exports = function (opts, cb) {
   var token = getAuthToken(registry)
 
   var headers = {
-    'accept': 'application/vnd.npm.install-v1+json'
+    // in order to detect unpublish i have to pull the full doc =(
+    //'accept': 'application/vnd.npm.install-v1+json',
   }
 
   if (token) {
@@ -30,7 +31,8 @@ module.exports = function (opts, cb) {
 
   var reqOpts = {
     url: registry+pkg.replace('/', '%2f'),
-    headers: headers
+    headers: headers,
+    gzip:true
   }
 
   var delay = 1000
@@ -56,7 +58,10 @@ module.exports = function (opts, cb) {
 
 
       if (version) {
-        if (obj.versions[version]) {
+        if (obj.time[version]) {
+          if(!obj.versions[version]){
+            console.log('the version you are waiting for '+version+' was unpublished at '+obj.time[version])
+          }
           return cb(null, obj)
         }
       } else {
